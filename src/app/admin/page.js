@@ -27,7 +27,10 @@ export default function AdminLoginPage() {
     // Direct redirection to simulate login
     setTimeout(() => {
       setLoading(false);
+      // Set the authorization cookie
+      document.cookie = "studio_session=authenticated; path=/; max-age=3600; SameSite=Lax";
       router.push("/admin/dashboard");
+      router.refresh();
     }, 800);
   };
 

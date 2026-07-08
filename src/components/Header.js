@@ -12,8 +12,6 @@ export default function Header() {
   const navLinks = [
     { name: "Portfolio", href: "/portfolio" },
     { name: "About", href: "/about" },
-    { name: "Intranet", href: "/intranet" },
-    { name: "Admin", href: "/admin" },
   ];
 
   const isActive = (path) => pathname === path || pathname.startsWith(`${path}/`);

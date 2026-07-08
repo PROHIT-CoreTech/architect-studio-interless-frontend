@@ -52,12 +52,6 @@ export default function Footer() {
             <Link href="/about" className="hover:text-studio-dark transition-colors duration-300">
               About the Office
             </Link>
-            <Link href="/intranet" className="hover:text-studio-dark transition-colors duration-300">
-              Staff Portal
-            </Link>
-            <Link href="/admin" className="hover:text-studio-dark transition-colors duration-300">
-              CMS Log In
-            </Link>
           </div>
         </div>
 

@@ -27,12 +27,12 @@ export default function AdminDashboardPage() {
   const mediaInputRef = useRef(null);
 
   // Sidebar Menu Navigation
-  const [activeTab, setActiveTab] = useState("Projects");
+  const [activeTab, setActiveTab] = useState("PROJECTS");
 
   const menuItems = [
-    { name: "Projects", icon: <FolderPlus size={16} /> },
-    { name: "Portfolios Grid", icon: <Grid size={16} /> },
-    { name: "Team Settings", icon: <UserCheck size={16} /> }
+    { name: "PROJECTS", icon: <FolderPlus size={16} /> },
+    { name: "PORTFOLIOS GRID", icon: <Grid size={16} /> },
+    { name: "TEAM SETTINGS", icon: <UserCheck size={16} /> }
   ];
 
   // Drag and Drop handlers
@@ -149,17 +149,24 @@ export default function AdminDashboardPage() {
     }, 1000);
   };
 
+  const handleLogout = () => {
+    // Clear the authentication cookie by expiring it
+    document.cookie = "studio_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
+    router.push("/admin");
+    router.refresh();
+  };
+
   return (
     <div className="min-h-screen bg-studio-bg flex border-b border-studio-border">
       
-      {/* 1. LEFT SIDEBAR NAVIGATION */}
-      <aside className="w-64 border-r border-studio-border bg-white flex flex-col justify-between shrink-0 hidden md:flex">
+      {/* 1. LEFT SIDEBAR NAVIGATION - Premium Dark Theme */}
+      <aside className="w-64 bg-studio-dark text-white flex flex-col justify-between shrink-0 hidden md:flex border-r border-studio-dark/40">
         
         {/* Top Section */}
         <div className="p-6 space-y-8">
           <div className="flex items-center space-x-2">
             <LayoutDashboard className="text-studio-accent" size={18} />
-            <span className="text-xs uppercase tracking-blueprint font-sans font-bold text-studio-dark">
+            <span className="text-xs uppercase tracking-blueprint font-sans font-bold text-white">
               CMS Console
             </span>
           </div>
@@ -168,11 +175,12 @@ export default function AdminDashboardPage() {
             {menuItems.map((item) => (
               <button
                 key={item.name}
+                type="button"
                 onClick={() => setActiveTab(item.name)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 text-xs uppercase tracking-architect font-sans font-medium transition-colors ${
                   activeTab === item.name
-                    ? "bg-studio-light text-studio-dark font-semibold border-l-2 border-studio-dark"
-                    : "text-studio-dark/60 hover:text-studio-dark hover:bg-studio-bg/50 border-l-2 border-transparent"
+                    ? "bg-white/10 text-white font-semibold border-l-2 border-studio-accent"
+                    : "text-white/60 hover:text-white hover:bg-white/5 border-l-2 border-transparent"
                 }`}
               >
                 {item.icon}
@@ -183,10 +191,11 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Bottom Section */}
-        <div className="p-6 border-t border-studio-border/50">
+        <div className="p-6 border-t border-white/10">
           <button
-            onClick={() => router.push("/admin")}
-            className="w-full flex items-center justify-between text-xs uppercase tracking-architect text-studio-muted hover:text-studio-dark transition-colors py-2"
+            type="button"
+            onClick={handleLogout}
+            className="w-full flex items-center justify-between text-xs uppercase tracking-architect text-white/60 hover:text-white transition-colors py-2"
           >
             <span>Log Out Console</span>
             <LogOut size={14} />
